@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('Layouts/LayoutFull');
-});
+Route::get('/', function ()
+ {
+     return view('Layouts/LayoutFull');
+ 
+ }
+);
+
+ 
