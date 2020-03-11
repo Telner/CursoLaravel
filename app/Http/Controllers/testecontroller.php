@@ -8,6 +8,6 @@ class testecontroller extends Controller
 {
     public function index()
     {
-        return view('Layouts/LayoutFull');
+        return view('clients/index');
     }
 }
