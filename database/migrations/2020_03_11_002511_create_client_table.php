@@ -13,9 +13,13 @@ class CreateClientTable extends Migration
      */
     public function up()
     {
-        Schema::create('client', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->unsignedBigInteger('id',true);
             $table->string('name');
+            $table->BigInteger('cpf');
+            $table->string('email');
+            $table->boolean('active_flag')->default(true);
+            $table->string('endereco')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateClientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client');
+        Schema::dropIfExists('clients');
     }
 }
