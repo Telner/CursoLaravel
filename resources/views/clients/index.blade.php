@@ -1,6 +1,9 @@
 @extends('layouts.LayoutFull')
 @push('css')
 @endpush
+@if(Session::has('success'))
+  toastr["success"]("<b>Sucesso: </b><br>{{ Session::get('success') }}");
+@endif
 
          
 @section('conteudo')
@@ -13,6 +16,7 @@
             <th>Nome</th>
             <th>CPF</th>
             <th>Email</th>
+            <th>Endereço</th>
             <th>Ações</th>
 
           </tr>
@@ -20,9 +24,10 @@
         <tbody>
           @foreach($clients as $client)
           <tr>            
-          <td>{{$client->cpf}}</td>
-            <td>{{$client->name}}</td>
+          <td>{{$client->name}}</td>
+            <td>{{$client->cpf}}</td>
             <td>{{$client->email}}</td>
+            <td>{{$client->endereco}}</td>
             <td><a href="#" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Editar</a>
               <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Excluir</a></td>
             
@@ -34,7 +39,7 @@
           @endforeach
           </tbody>
   </table>
-  <div class='btn btn-sm btn-success' type="submit">Adicionar</div>
+  <a href="/CursoLaravel/public/client/create" class='btn btn-sm btn-success' type="submit">Adicionar</a>
   
 
   

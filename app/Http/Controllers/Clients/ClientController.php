@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Http\Requests\ClientStoreRequest;
 
 class ClientController extends Controller
 {
@@ -23,12 +24,29 @@ class ClientController extends Controller
     }
     public function create()
     {
-       $clientModel = app(Client::class);
-       $client = $clientModel->create(
-           [
-               'name'=>'klebin Foguete', 'cpf'=>11122233345, 'email'=>'cocopretopreto@hotmail.com', 'active_flag'=>false,
-           ]
+        //    $client = $clientModel->create(
+            //    $clientModel = app(Client::class);
+            //        [
+                //            'name'=>'klebin Foguete', 'cpf'=>11122233345, 'email'=>'cocopretopreto@hotmail.com', 'active_flag'=>false,
+    //        ]
+    //    ); 
+       return view('clients/create');
+    }
+    public function store(ClientStoreRequest $request)
+    {       
+        $data = $request->all();
+     
+        $clientModel = app(Client::class);
+        $client = $clientModel->create(       
+         [
+          'name'=>$data['name'],
+          'cpf'=>preg_replace("/[^A-Za-z0-9]/", '',$data['cpf']),
+          'email'=>$data['email'], 
+          'active_flag'=>isset($data['active_flag']) ? true : false,
+          'endereco'=>$data['endereco']??null,
+         ]
        ); 
-       dd($client);
+   return redirect()->route('client.index');
+        
     }
 }

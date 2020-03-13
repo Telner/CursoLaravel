@@ -4,20 +4,32 @@
 
          
 @section('conteudo')
-   
+   @if ($errors->any())
+   <div class="alert alert-secondary text-danger">
+     <ul>
+       @foreach($errors->all() as $errors)
+        <li>{{$errors}}</li>
+        @endforeach
+     </ul>
+   </div>
+   @endif
 
       <div class="starter-template">
          
-        <form action="" method="get">
+      <form method="POST" action="{{route('client.store')}}" class="form-horisontal dorm-validate">
+        {{csrf_field()}}
+
 
           <div class="container">                     
             
                 <div class="row mb-3">
-
-                    <div class="col">
-                    <div class="form-group">
+                  
+                  <div class="col">
+                  <div class="form-group">
                     <label>Nome</label>
-                    <input type="text" class="form-control">
+                    <input id='name' name='name' type="text" class="form-control" value="{{old("name")}}">
+                    
+                    
                     </div>
                     </div>
 
@@ -26,7 +38,7 @@
 
                         <div class="form-group">
                          <label>CPF</label>                         
-                        <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');">
+                        <input id='cpf' name='cpf' type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" value="{{old("cpf")}}">
                         </div>
 
                     </div>
@@ -36,59 +48,22 @@
                     
                     <div class="form-group">
                         <label>Endereço</label>
-                        <input type="text" class="form-control">           
+                        <input id='endereco' name='endereco' type="text" class="form-control" value="{{old("endereco")}}">           
                         </div>
                         <div class="form-group">
                           <label>Email</label>
-                          <input type="text" class="form-control">           
+                          <input id='email' name='email' type="text" class="form-control" value="{{old("email")}}">                                     
                           </div>
+                          <label>marca essa porra</label>
+
+                          <input type="radio" id='active_flag' name='active_flag' class="form-controls" >  
                 
 
-
-            <button class="btn btn-danger" type="submit">Concluido</button>
+                          <br><br>
+            <input class="btn btn-danger" type="submit">
             <br><br>
 
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Header</th>
-                          <th>Header</th>
-                          <th>Header</th>                          
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1,001</td>
-                          <td>Lorem</td>
-                          <td>ipsum</td>
-                          <td>dolor</td>
-                          
-                        </tr>
-                        <tr>
-                          <td>1,002</td>
-                          <td>amet</td>
-                          <td>consectetur</td>
-                          <td>adipiscing</td>
-                          
-                        </tr>
-                        <tr>
-                          <td>1,003</td>
-                          <td>Integer</td>
-                          <td>nec</td>
-                          <td>odio</td>
-                          
-                        </tr>
-                        <tr>
-                          <td>1,003</td>
-                          <td>libero</td>
-                          <td>Sed</td>
-                          <td>cursus</td>
-                          
-                        </tr>                    
-                        </tbody>
-                </table>
+           
             </div>
           </div>
         </form>
