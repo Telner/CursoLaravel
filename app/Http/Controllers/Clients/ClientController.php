@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Http\Requests\ClientStoreRequest;
+use App\Http\Requests\ClientUpdateRequest;
+
 
 class ClientController extends Controller
 {
@@ -46,7 +48,52 @@ class ClientController extends Controller
           'endereco'=>$data['endereco']??null,
          ]
        ); 
-   return redirect()->route('client.index');
+    return redirect()->route('client.index');        
+    }
+    public function destroy($id)
+    {
+        if(!empty($id)){
+            $clientModel = app(Client::class);
+            $client = $clientModel->find($id);
+            if(!empty($client)){
+                $client->delete();
+                return response()->json([
+                    'status'  => 'success',
+                    'message' => 'Cliente deletado com sucesso.',
+                    'reload'  => true,
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status'  => 'error',
+                    'message' => 'ID não está na requisição',
+                    'reload'  => true,
+                ]);
+        
+            }
+        }     
+        
+    }    
+    public function edit($id){
+
+        $clientModel = app(Client::class);
+        $client = $clientModel->find($id);
+        return view('clients/edit', compact('client'));
         
     }
+    public function update(ClientUpdateRequest $request,$id){
+        $data = $request->all();    
+        $clientModel = app(Client::class);
+        $client = $clientModel->find($id);
+        $client->update([
+            'name'=> $data['name'],
+            'cpf'=>preg_replace("/[^A-Za-z0-9]/", "",$data['cpf']) ,
+            'email'=>$data['email'],
+            'endereco'=>$data['endereco'] ?? null,
+           'active_flag'=> (($data['activebox'] ?? ' ') == null),
+        ]);
+        return redirect()->route('client.index');
+    }
+
+
 }

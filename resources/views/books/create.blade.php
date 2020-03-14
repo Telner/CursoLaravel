@@ -16,7 +16,7 @@
 
       <div class="starter-template">
          
-      <form method="POST" action="{{route('client.store')}}" class="form-horisontal dorm-validate">
+      <form method="POST" action="{{route('book.store')}}" class="form-horisontal dorm-validate">
         {{csrf_field()}}
 
 
@@ -27,37 +27,27 @@
                   <div class="col">
                   <div class="form-group">
                     <label>Nome</label>
-                    <input id='name' name='name' type="text" class="form-control" value="{{old("name")}}">
-                    
+                    <input id='name' name='name' type="text" class="form-control" value="{{old("name")}}">                    
                     
                     </div>
                     </div>
-
                      
                     <div class="col">
 
                         <div class="form-group">
-                         <label>CPF</label>                         
-                        <input id='cpf' name='cpf' type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" value="{{old("cpf")}}">
+                         <label>Autor</label>                         
+                         <input id='writer' name='writer' type="text" class="form-control" value="{{old("writer")}}">
                         </div>
 
                     </div>
-                </div>
-                    
+                </div>                    
             
                     
                     <div class="form-group">
-                        <label>Endereço</label>
-                        <input id='endereco' name='endereco' type="text" class="form-control" value="{{old("endereco")}}">           
-                        </div>
-                        <div class="form-group">
-                          <label>Email</label>
-                          <input id='email' name='email' type="text" class="form-control" value="{{old("email")}}">                                     
-                          </div>
-                          
-                          <label>  Você aceita jesus em sua vida?</label><br>
-                          <label>  Sim</label>
-                          <input type="checkbox" id='active_flag' name='active_flag' class="form-controls" ><br>
+                    <label>Quantas Paginas ?</label>
+                    <input id='pages' name='pages' type="text" class="form-control" value="{{old("pages")}}">           
+                    </div>
+                        
                           
                 
 
